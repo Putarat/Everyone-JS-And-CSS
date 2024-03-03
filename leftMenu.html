@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- jquery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+ <style>
+      body {
+        /* font-family: "Lato", sans-serif; */
+
+        background-color: #f4f3ef;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        border-radius: 10px;
+        top: 16px;
+        left: 0;
+        background-color: #ffffff;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+
+      .sidenav a {
+        padding: 5px 0px 5px 13px;
+        text-decoration: none;
+        font-size: 15px;
+        color: #ffffff;
+        display: block;
+        transition: 0.3s;
+      }
+
+      /* .sidenav a:hover {
+        color: #fd0909;
+      } */
+      p {
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+      }
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+      .box {
+        padding: 1px 1px 1px 2px;
+        width: 206px;
+        height: 54px;
+         position: relative;
+      }
+
+      .box_1 {
+        background-color: #1b7ecf;
+      }
+
+      .box_2 {
+        background-color: #558f8f;
+      }
+      .iconSet {
+        margin-right: 9px;
+        margin-left: 9px;
+      }
+      
+       .AtiveSetContent::after  {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          left: 178px;
+          top: -22px;
+          border-top: 50px solid transparent;
+          border-bottom: 50px solid transparent;
+          border-right: 50px solid rgb(255, 255, 255);
+           z-index: 2;
+        }
+          .AtiveSetContent::before  {
+            content: "";
+          position: absolute;
+          width: 0;
+          height: 0;
+          left: 214px;
+          top: -22px;
+          border-top: 50px solid transparent;
+          border-bottom: 50px solid transparent;
+          border-right: 50px solid #f4f3ef;
+          z-index: 3;
+        }
+
+        .box_Set{
+          
+        }
+          
+      #main {
+        transition: margin-left 0.5s;
+        padding: 16px;
+        color: rgb(0, 0, 0);
+       
+      }
+
+
+      @media screen and (max-height: 450px) {
+        .sidenav {
+          padding-top: 15px;
+        }
+        .sidenav a {
+          font-size: 18px;
+        }
+      }
+ </style>
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+          <a
+            href="javascript:void(0)"
+            style="color: black"
+            class="closebtn"
+            onclick="closeNav()"
+            >&times;
+            </a
+          >
+            <p href="" class="" style="color: black; font-size: 20px ;text-align: -webkit-center;">ADMIN CHATBOT</p>
+            <hr />
+            <a href="#" onclick="FnOnClickSelectOnYear('1')"
+              ><div class="box box_1  BoxDetail" >
+                <p><i class="fa-solid fa-chart-simple iconSet"></i>DATA ANALYTICS</p>
+              </div></a
+            >
+            <a href="#" class="" onclick="FnOnClickSelectOnYear('2')"
+              ><div class="box box_2  BoxDetail" >
+                <p><i class="fa-solid fa-chart-column iconSet"></i>ENTITIES</p>
+              </div></a
+            >
+
+      </div>
+
+
+      <div id="main">
+        
+        <div class="box" style="width: 100%; height:100vh; background-color: rgb(255, 255, 255); border-radius: 10px; padding: 20px;">
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+          <div class="boxCheart" id="page1" style="margin-top: 50px;">
+            <div class="row">
+                   <div class="col-md-12" class="box_Set">
+                        <div class="" style="width: 500px; height: 500px;">
+                          <canvas id="myChart"></canvas>
+                        </div>
+                   </div>
+            </div>
+          </div>
+
+          <div class="boxCheart" id="page2" style="margin-top: 50px;">
+            <div class="row">
+              <div class="col-md-12" class="box_Set">
+                         xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              </div>       
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['reset', 'change', 'unlock', 'unlock', 'Reset', 'Change'],
+      datasets: [{
+        label: '# of Votes',
+        data: [10, 5, 6, 7, 8, 9],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+
+    <script>
+      FnOnClickSelectOnYear("1");
+      function FnOnClickSelectOnYear(valueYear) {  
+   
+        if(valueYear == "1"){
+            $("#page1").css("display", "block");
+            $("#page2").css("display", "none");
+        } else if (valueYear == "2"){
+       
+            $("#page1").css("display", "none");
+            $("#page2").css("display", "block");
+        }
+          AddActive(valueYear);             
+      }
+
+      function AddActive(ValueSetNumber) {
+                var number = ValueSetNumber;
+                let BoxDetailJournal_ = document.getElementsByClassName("BoxDetail");
+                for (let i = 0; i < BoxDetailJournal_.length; i++) {
+                    BoxDetailJournal_[i].className = BoxDetailJournal_[i].className.replace(" AtiveSetContent", "");
+                }
+                BoxDetailJournal_[number - 1].className += " AtiveSetContent";
+      }
+
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+      }
+    </script>
+
+
+
+
+  </body>
+</html>

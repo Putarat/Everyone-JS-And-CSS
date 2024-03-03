@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+const ssID = "1Rm3R86onCXH3x9Kfqm5h8UePpeLxYgcGNNg5SYZQCos"; //Google Sheet ID
+const pdfFolder = DriveApp.getFolderById("1jIc4peWU5vLrfLn-qv_dcDyfMhHtNuUw"); //Folder PDF ID
+const tempFolder = DriveApp.getFolderById("1Sm-yW0sbs1pUHJdCOMRTWWzhn21HROPf"); // temp folder ID
+const templateDoc = DriveApp.getFileById("1upNC9psOQm-wJoKOUAF0-kSmrX8EJ2YGDNH8miB71UY"); // template document ID
+const sheetname = "salaryjan67";
+
+function getInfo() {
+
+  // เพิ่มชื่อ column ถ้าต้องการเพิ่มตัวแปรที่จะส่ง
+  const info = {
+    'period' : '',
+    'datenum' : '',
+    'start' : '',
+    'emp' : '',
+    'id' : '',
+    'bank' : '',
+    'salary' : '',
+    'tele' : '',
+    'test' : '',
+    'ot' : '',
+    'allow' : '',
+    'bonus' : '',
+    'welfare' : '',
+    'income' : '',
+    'missing' : '',
+    'social' : '',
+    'com' : '',
+    'pnd' : '',
+    'loan' : '',
+    'tax' : '',
+    'deduc' : '',
+    'epual' : '',
+    'duedate' : '',
+    'dep' : '',
+    'job' : '',
+    'stat' : '',
+    'child' : '',
+    'ns' : '',
+    'lip' : '',
+    'slip' : '',
+    'ri' : '',
+    'dona' : '',
+    'foie' : '',
+    'fme' : '',
+    'fpas' : '',
+    'fmas' : '',
+    'fat' : '',
+    'mot' : '',
+    'fa' : '',
+    'mo' : '',
+    'ltf' : '',
+    'rmf' : '',
+    'disa' : '',
+  };
+
+  const ssData = SpreadsheetApp.openById(ssID).getSheetByName(sheetname);
+  ssData.getLastRow();
+  for(var i=2; i<=ssData.getLastRow(); i++){
+      // เก็บข้อมูลเข้าตัวแปล info
+      // ถ้าอยากเก็บข้อมูลวันที่ ให้ใช้ function DateConvert ในการเปลี่ยน format ของวันที่ให้สั้นลง
+      info.period = ssData.getRange(i,1).getValue();
+      info.datenum = ssData.getRange(i,2).getValue();
+      info.start = ssData.getRange(i,3).getValue();
+      info.emp = ssData.getRange(i,4).getValue();
+      info.id = ssData.getRange(i,5).getValue();
+      info.bank = ssData.getRange(i,6).getValue();
+      info.salary = ssData.getRange(i,7).getValue();
+      info.tele = ssData.getRange(i,8).getValue();
+      info.test = ssData.getRange(i,9).getValue();
+      info.ot = ssData.getRange(i,10).getValue();
+      info.allow = ssData.getRange(i,11).getValue();
+      info.bonus = ssData.getRange(i,12).getValue();
+      info.welfare = ssData.getRange(i,13).getValue();
+      info.income = ssData.getRange(i,14).getValue();
+      info.missing = ssData.getRange(i,15).getValue();
+      info.social = ssData.getRange(i,16).getValue();
+      info.com = ssData.getRange(i,17).getValue();
+      info.pnd = ssData.getRange(i,18).getValue();
+      info.loan = ssData.getRange(i,19).getValue();
+      info.tax = ssData.getRange(i,20).getValue();
+      info.deduc = ssData.getRange(i,21).getValue();
+      info.epual = ssData.getRange(i,22).getValue();
+      info.duedate = ssData.getRange(i,23).getValue();
+      info.dep = ssData.getRange(i,24).getValue();
+      info.job = ssData.getRange(i,25).getValue();
+      info.stat = ssData.getRange(i,26).getValue();
+      info.child = ssData.getRange(i,27).getValue();
+      info.ns = ssData.getRange(i,28).getValue();
+      info.lip = ssData.getRange(i,29).getValue();
+      info.slip = ssData.getRange(i,30).getValue();
+      info.ri = ssData.getRange(i,31).getValue();
+      info.dona = ssData.getRange(i,32).getValue();
+      info.foie = ssData.getRange(i,33).getValue();
+      info.fme = ssData.getRange(i,34).getValue();
+      info.fpas = ssData.getRange(i,35).getValue();
+      info.fmas = ssData.getRange(i,36).getValue();
+      info.fat = ssData.getRange(i,37).getValue();
+      info.mot = ssData.getRange(i,38).getValue();
+      info.fa = ssData.getRange(i,39).getValue();
+      info.mo = ssData.getRange(i,40).getValue();
+      info.ltf = ssData.getRange(i,41).getValue();
+      info.rmf = ssData.getRange(i,42).getValue();
+      info.disa = ssData.getRange(i,43).getValue();
+      var email = ssData.getRange(i,44).getValue();
+      
+      // var pdfFile = createPDF(info);
+      const password = "1234";
+      var pdfFile = createProtectedPDF(info, password);
+      // วาง link PDF ในชีตของเรา
+      ssData.getRange(i,45).setValue(pdfFile.getUrl());
+
+      // ทำการส่งอีเมล
+      sendEmail(email,pdfFile);
+  }
+
+}
+
+function createPDF(info){
+
+  const newTempFile = templateDoc.makeCopy(tempFolder);
+  const openDoc = DocumentApp.openById(newTempFile.getId());
+  const body = openDoc.getBody();
+
+  // การวางข้อมูลแทนข้อมูลใน template google doc 
+  body.replaceText("{period}",info.period);
+  body.replaceText("{datenum}",info.datenum);
+  body.replaceText("{start}",info.start);
+  body.replaceText("{emp}",info.emp);
+  body.replaceText("{id}",info.id);
+  body.replaceText("{bank}",info.bank);
+  body.replaceText("{salary}",info.salary);
+  body.replaceText("{tele}",info.tele)
+  body.replaceText("{test}",info.test)
+  body.replaceText("{ot}",info.ot)
+  body.replaceText("{allow}",info.allow)
+  body.replaceText("{bonus}",info.bonus)
+  body.replaceText("{welfare}",info.welfare)
+  body.replaceText("{income}",info.income)
+  body.replaceText("{missing}",info.missing)
+  body.replaceText("{social}",info.social)
+  body.replaceText("{com}",info.com)
+  body.replaceText("{pnd}",info.pnd)
+  body.replaceText("{loan}",info.loan)
+  body.replaceText("{tax}",info.tax)
+  body.replaceText("{deduc}",info.deduc)
+  body.replaceText("{epual}",info.epual)
+  body.replaceText("{duedate}",info.duedate);
+  body.replaceText("{dep}",info.dep);
+  body.replaceText("{job}",info.job);
+  body.replaceText("{stat}",info.stat);
+  body.replaceText("{child}",info.child);
+  body.replaceText("{ns}",info.ns);
+  body.replaceText("{lip}",info.lip);
+  body.replaceText("{slip}",info.slip);
+  body.replaceText("{ri}",info.ri);
+  body.replaceText("{dona}",info.dona);
+  body.replaceText("{foie}",info.foie);
+  body.replaceText("{fme}",info.fme);
+  body.replaceText("{fpas}",info.fpas);
+  body.replaceText("{fmas}",info.fmas);
+  body.replaceText("{fat}",info.fat);
+  body.replaceText("{mot}",info.mot);
+  body.replaceText("{fa}",info.fa);
+  body.replaceText("{mo}",info.mo);
+  body.replaceText("{ltf}",info.ltf);
+  body.replaceText("{rmf}",info.rmf);
+  body.replaceText("{disa}",info.disa);
+  openDoc.saveAndClose();
+
+  const blobPDF = newTempFile.getAs(MimeType.PDF);
+
+  // การสร้างและตั้งชื่อ file
+  const pdfFile = pdfFolder.createFile(blobPDF).setName(info.emp + new Date());
+  tempFolder.removeFile(newTempFile);
+
+  return pdfFile;
+
+}
+
+function sendEmail(email,pdfFile){
+
+  // ตั้งชื่อ subject และ body ของ email
+  GmailApp.sendEmail(email, "สลิปเงินเดือนของพนักงานในบริษัท พี.เอ.เอ็ม. เอ็นจิเนียริ่ง แอนด์ ออโตเมชั่น จำกัด ในรูปแบบไฟล์ PDF รายบุคคล)","โปรดดูข้อมูลสลิปเงินเดือนของท่านในไฟล์แนบฉบับนี้ หากมีข้อมูลผิดพลาดประการใดโปรดติดต่อคุณพิชญาณเพื่อทำการเเก้ไข ขออภัยมานะที่นี้ด้วยนะคะ ***เอกสารนี้เป็นความลับของบริษัทเท่านั้น ห้ามเปิดเผยข้อมูลเเก่ผู้อื่นโดยเด็ดขาด***",{
+    attachments: [pdfFile],
+    name: 'สลิปเงินเดือนของพนังงาน' // ชื่อผู้ส่งอีเมล
+  });
+}
+
+function createProtectedPDF(info, password) {
+  const newTempFile = templateDoc.makeCopy(tempFolder);
+  const openDoc = DocumentApp.openById(newTempFile.getId());
+  const body = openDoc.getBody();
+
+  openDoc.saveAndClose();
+
+  const blobPDF = newTempFile.getAs(MimeType.PDF);
+
+  const protectedBlob = Utilities.encrypt(blobPDF.getBytes(), password, false);
+
+  const pdfFile = pdfFolder.createFile("Protected_" + info.emp + "_" + new Date() + ".pdf", protectedBlob);
+  tempFolder.removeFile(newTempFile);
+
+  return pdfFile;
+}
+    </script>
+</body>
+</html>

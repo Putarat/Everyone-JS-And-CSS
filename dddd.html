@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // const dataB = {
+        //         col1: "",
+        //         col2: "",
+        //         col3: "",
+        //         COL5: "",
+        //     };
+
+
+        //     const dataC = [];
+        //     for (let i = 0; i < 3; i++) {
+        //         dataC.push(dataB);
+        //     }
+
+//             const renamedObj = [
+//                  {
+//                         B: "",
+//                     }, {
+                    
+//                         A: "d",
+                      
+//                     }
+
+//                 ];
+
+//                 const ColumnsFix =
+//                 {
+//                     a: "",
+//                     b: "",
+//                     c: "",
+//                     d: "",
+                  
+//                 };
+//                 console.log("");
+//                 const objDataExcel = []
+//                 for (let a = 0; a < renamedObj.length; a++) {
+//                     const obj = {};
+//                     for (const key of Object.keys(ColumnsFix)) {
+//                         if (!Object.keys(renamedObj[a]).includes(key)) {
+//                             if (renamedObj[a][key.toUpperCase().replace(/ /g, "")] !== ColumnsFix[key.toUpperCase().replace(/ /g, "")]) {
+//                                 obj[key] = ColumnsFix[key];
+//                             }
+//                         }
+//                     }
+//                     const objTemp = Object.assign({}, renamedObj[a], obj);
+//                     objDataExcel.push(objTemp);
+//                 }
+
+
+//             console.log("dataCx :", objDataExcel);
+
+//   // ตัวอย่างอาเรย์ของอ็อบเจ็กต์
+// var arrayOfObjects = [
+//   { name: 'John', age: 30, country: 'USA' },
+//   { name: 'Alice', age: 25, country: 'Canada' },
+//   { name: 'Bob', age: 35, country: 'UK' }
+// ];
+
+// // กำหนดลำดับ key ที่คุณต้องการ
+// var customOrder = ['country', 'age', 'name'];
+
+// // เรียงลำดับอาเรย์ตามลำดับ key ที่กำหนด
+// arrayOfObjects.sort(function(a, b) {
+//   return customOrder.indexOf(a) - customOrder.indexOf(b);
+// });
+
+// // ผลลัพธ์
+// console.log(arrayOfObjects);
+
+// const objArray = [
+//   { id: 1, name: "A" },
+//   { id: 1, name: "A" },
+//   { id: 1, name: "A" },
+//   { id: 1, name: "A" },
+//   { id: 1, name: "A" },
+//   { id: 2, name: "B" },
+//   { id: 1, name: "C" },
+//   { id: 3, name: "D" },
+// ];
+
+// const uniqueArray = objArray.reduce((acc, obj) => {
+//   const found = acc.find((otherObj) => obj.id === otherObj.id && obj.name === otherObj.name);
+
+//   if (!found) {
+//     acc.push(obj);
+//   }
+
+//   return acc;
+// }, []);
+
+
+
+const objArray = [
+  { id: 1, name: "A", age: 10 },
+  { id: 2, name: "B", age: 20 },
+  { id: 3, name: "C", age: 30 },
+];
+
+
+for (let i = 0; i < objArray.length; i++) {
+    delete objArray[i]["name"];
+}
+
+
+
+
+      console.log(objArray);
+
+
+// const targetKey = "name"; // Key of the object to remove
+// const targetValue = "A"; // Value of the object to remove
+
+// const uniqueArray = objArray.reduce((acc, obj) => {
+//   if (obj[targetKey] !== targetValue && obj[targetKey] !== "B") {
+//     acc.push(obj);
+//   }
+
+//   return acc;
+// }, []);
+// console.log(uniqueArray);
+
+    </script>
+</body>
+</html>

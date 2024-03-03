@@ -1,0 +1,101 @@
+    /* url ที่อยู่ Format นามสกุล */
+    /* นามสกุล */
+    /* woff  woff */
+    /* ttf truetype */
+    /* svg  svg */
+    /* eot embedded-opentype */
+    /* <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet"/> */
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Black');
+        src: url('kanit_Font/Kanit-Black.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-BlackItalic.ttf') format('truetype');
+        font-weight: 800;
+        font-style: normal;
+      }
+  
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Black');
+        src: url('kanit_Font/Kanit-Black.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-BlackItalic.ttf') format('truetype');
+        font-weight: 800;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Bold');
+        src: url('kanit_Font/Kanit-Bold.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-BoldItalic.ttf') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font//t/Kanit-ExtraBold');
+        src: url('kanit_Font//Kanit-ExtraBold.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-ExtraBoldItalic.ttf') format('truetype');
+        font-weight: 650;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-ExtraLight');
+        src: url('kanit_Font/Kanit-ExtraLight.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-ExtraLightItalic.ttf') format('truetype');
+        font-weight: 300;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Italic');
+        src: url('kanit_Font/Kanit-Italic.ttf?#iefix') format('truetype');
+        font-weight: 300;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Light');
+        src: url('kanit_Font/Kanit-Light.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-LightItalic.ttf') format('truetype');
+        font-weight: 300;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Medium');
+        src: url('kanit_Font/Kanit-Medium.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-MediumItalic.ttf') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Regular');
+        src: url('kanit_Font/Kanit-Regular.ttf?#iefix') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-SemiBold');
+        src: url('kanit_Font/Kanit-SemiBold.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-SemiBoldItalic.ttf') format('truetype');
+        font-weight: 600;
+        font-style: normal;
+    }
+    
+    @font-face {
+        font-family: "Kanit";
+        src: url('kanit_Font/Kanit-Thin');
+        src: url('kanit_Font/Kanit-Thin.ttf?#iefix') format('truetype'), url('kanit_Font/Kanit-ThinItalic.ttf') format('truetype');
+        font-weight: 100;
+        font-style: normal;
+    } 
+  /* ---------------END Defall SET Text------------------------------------------------------ */
+  
+    *,body{
+       font-family: "Kanit", sans-serif ;
+      font-style: normal !important; 
+    }
+  

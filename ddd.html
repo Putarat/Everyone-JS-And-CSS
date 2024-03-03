@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<style>
+    div.upload {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: inline-block;
+        height: 39px;
+        padding: 3px 40px 3px 3px;
+        position: relative;
+        width: auto;
+      }
+  
+      div.upload:hover {
+        opacity: 0.95;
+      }
+  
+      div.upload input[type="file"] {
+        display: input-block;
+        width: 100%;
+        height: 30px;
+        opacity: 0;
+        cursor: pointer;
+        position: absolute;
+        left: 0; 
+        top: -1px
+      }
+  
+      .uploadButton {
+        background-color: #296192;
+        border: none;
+        border-radius: 3px;
+        color: #FFF;
+        cursor: pointer;
+        display: inline-block;
+        height: 30px;
+        margin-right: 15px;
+        width: auto;
+        padding: 0 20px;
+        box-sizing: content-box;
+      }
+  
+      .fileName {
+        font-family: Arial;
+        font-size: 14px;
+      }
+  
+      .upload+.uploadButton {
+        height: 38px;
+      }
+  
+      .table-bordered th {
+  
+        color: white;
+        text-shadow: 1px 1px 2px #514b4c;
+      }
+  
+      .trHeader{
+         background-color: #296192;
+      }
+      /* Table */
+      .table-bordered tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+  </style>
+  
+  
+  <style>
+      .alert {
+          position: relative;
+          top: 10;
+          left: 0;
+          width: auto;
+          height: auto;
+          padding: 10px;
+          margin: 10px;
+          line-height: 1.8;
+          border-radius: 5px;
+          cursor: hand;
+          cursor: pointer;
+          font-family: sans-serif;
+          font-weight: 400;
+      }
+  
+      .alertCheckbox {
+          display: none;
+      }
+  
+      :checked+.alert {
+          display: none;
+      }
+  
+      .alertText {
+          display: table;
+          margin: 0 auto;
+          text-align: center;
+          font-size: 16px;
+      }
+  
+      .alertClose {
+          float: right;
+          padding-top: 5px;
+          font-size: 10px;
+      }
+  
+      .clear {
+          clear: both;
+      }
+      .error {
+          background-color: #FEE;
+          border: 1px solid #EDD;
+          color: #A66;
+      }
+  </style>
+  
+  
+  <style>
+      .drop-container {
+      /* position: relative;
+      display: flex; 
+      gap: 10px;
+      flex-direction: column;
+      justify-content: center; */
+      text-align: -webkit-center;
+  
+      align-items: center;
+      width: 100%;
+      height: 200px;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px dashed #555;
+      color: #444;
+      cursor: pointer;
+      transition: background .2s ease-in-out, border .2s ease-in-out;
+    }
+    
+    .drop-container:hover,
+    .drop-container.drag-active {
+      background: #eee;
+      border-color: #111;
+    }
+    
+    .drop-container:hover .drop-title,
+    .drop-container.drag-active .drop-title {
+      color: #222;
+    }
+    
+    .drop-title {
+      color: #444;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      transition: color .2s ease-in-out;
+    }
+    
+  
+    </style>
+  <div id="modalImportExcel" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+  
+      <div class="modal-dialog modal-dialog-lg">
+          <div class="modal-content">
+  
+              <div class="modal-header mb-10">
+                  <button id="close_Excel" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h3 class="modal-title">ImportExcelFile Insurance Agent</h3>
+              </div>
+  
+              <div class="modal-body " style="overflow-y: auto;">
+  
+  
+                  <!-- Upload -->
+                  <div style="margin: 0 auto;width: 100%;">
+    
+                      <label for="InputfileExcel" class="drop-container" id="dropcontainer">
+                          <br>
+                        <span class="drop-title">Drop files here</span>
+                        <br><br>
+                        or
+                        <br><br>
+                        <form enctype="multipart/form-data" style="width: 100%;" style="display: inline-block;" >
+                          <div class="upload">
+                            <input type="button" class="uploadButton" value="Browse" />
+                            <input type="file" name="upload" id="InputfileExcel"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                            <span id="nameExcel" class="fileName">Select file..</span>
+                          </div>
+                          <input type="button" class="uploadButton" value="Upload File" id="inputExcelinsuran"  />
+                        </form>
+                      </label>
+                  
+                    
+                    
+                    </div>
+                  <!-- Upload -->
+  
+                  <!-- Table -->
+                  <table class="table table-bordered" id="TableInsuranceAgent" style="width: 100%;">
+                      <thead style="width: 100%;">
+                          <tr class="trHeader">
+                              <!-- add by js fn addColumnsToTableHeader -->
+                          </tr>
+                      </thead>
+                      <tbody id="TableBodyInsuranceAgent" style="width: 100%;">
+                          <!-- add by js fn addRowsAndCellsToTable -->
+                      </tbody>
+                  </table>
+                  <!-- Table -->
+  
+                  <!-- alert -->
+                  <label id="displayshowText">
+                      <!-- <input type="checkbox" class="alertCheckbox"  /> -->
+                      <div class="alert error">
+                          <!-- <span class="alertClose">X</span> -->
+                          <span class="alertText" id="TextshowError">
+                              <!-- <br class="clear" /></span> -->
+                      </div>
+                  </label>
+                  <!-- alert -->
+                    
+                  
+              </div> <!-- modal-body modal-body-lg -->
+  
+          </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+  
+  
+  </div><!-- /.modal -->
+</body>
+<script>
+    // btn and popup Excel ----------------------------------------------------------------------------------------------
+//Open tap
+
+// import Excel ----------------------------------------------------------------------------------------------
+
+$(document).ready(function () {
+  // alert();
+  // $("[name='ct_more-organization']").val($("#ipHDDefaultOrg").val());
+
+  // alert($("[name='sr_call_cet-org_id']").val());
+  // searchHNz = $("#ipSearchHN").val();
+  // searchHN =$("#ipHDDefaultOrg").val();
+  // alert("2",$("[name='u-org_id_id']").val());
+
+  const button = document.getElementById("inputExcelinsuran");
+  button.disabled = true;
+  button.style.backgroundColor = "#9c9c9c";
+
+  $("#displayshowText").hide();
+
+  $("#InputfileExcel").change(function (e) {
+    $in = $(this);
+    $in.next().html($in.val());
+  });
+
+  $("#close_Excel").click(function () {
+    clearTable();
+    document.getElementById("displayshowText").style.display = "none";
+    button.disabled = true;
+    button.style.backgroundColor = "#9c9c9c";
+    var reader = new FileReader();
+    reader.abort();
+    const fileInput = document.querySelector('input[type="file"]');
+    fileInput.value = "";
+    const form = document.querySelector("form");
+    form.reset();
+    document.getElementById("nameExcel").innerText = "Select file..";
+  });
+
+  $(".uploadButton").click(function () {
+    if (isLocalStorageItemValid("tableInsuranceAgentExcel")) {
+      const listExcelinput = JSON.parse(
+        localStorage.getItem("tableInsuranceAgentExcel")
+      );
+
+      let newKeyNameOrganizationCol = "Organization";
+      let newValueOrganizationRow = $("#ipHDDefaultOrg").val();
+
+      let newKeyNameCoverageTeamCol = "Coverageteam";
+      let newValueCoverageTeamRow = $("#ipHDDefaultTeam").val();
+
+      for (var i = 0; i < listExcelinput.length; i++) {
+        for (var key in listExcelinput[i]) {
+          if (listExcelinput[i].hasOwnProperty(key)) {
+            listExcelinput[i][newKeyNameOrganizationCol] =
+              newValueOrganizationRow;
+            listExcelinput[i][newKeyNameCoverageTeamCol] =
+              newValueCoverageTeamRow;
+          }
+        }
+      }
+
+      //   console.log("frontcheck", listExcelinput);
+
+      $.ajax({
+        type: "POST",
+        url:
+          GetCurrentDomainURL() + "/crmapps/input_insurance_agent_save_Excel",
+        // data: JSON.parse(localStorage.getItem('tableInsuranceAgentExcel')),
+        data: JSON.stringify(listExcelinput),
+        // data:jsonData,
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        success: function (data, status) {
+          //   console.log(data.form_saved);
+          if (data.form_saved) {
+            // console.log("succ");
+            changeStaus(data.form_saved);
+            // console.log("black", data.form_saved);
+            button.disabled = true;
+            button.style.backgroundColor = "#9c9c9c";
+          } else {
+            clearTable();
+            document.getElementById("displayshowText").style.display = "block";
+            document.getElementById("TextshowError").innerText =
+              "Unable to save data into the system.\t" + data.form_message;
+            console.error(data.form_errors);
+            button.disabled = true;
+            button.style.backgroundColor = "#9c9c9c";
+            changeStaus("Error");
+          }
+        },
+      });
+    } else {
+      console.log("not value");
+    }
+  });
+
+  const dropContainer = document.getElementById("dropcontainer");
+
+  dropContainer.addEventListener(
+    "dragover",
+    (e) => {
+      e.preventDefault();
+    },
+    false
+  );
+
+  dropContainer.addEventListener("dragenter", () => {
+    dropContainer.classList.add("drag-active");
+  });
+
+  dropContainer.addEventListener("dragleave", () => {
+    dropContainer.classList.remove("drag-active");
+  });
+
+  dropContainer.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropContainer.classList.remove("drag-active");
+    handleFileSelectDrop(e.dataTransfer.files);
+  });
+
+  var elementInputfileExcel = document.getElementById("InputfileExcel");
+
+  if (elementInputfileExcel) {
+    console.log("open table");
+    elementInputfileExcel.addEventListener("change", handleFileSelect, false);
+  }
+
+  document.getElementById("displayshowText").style.display = "none";
+});
+
+// import Excel ----------------------------------------------------------------------------------------------
+var dataColumns = [
+  {
+    Title: "",
+    Firstname: "",
+    Lastname: "",
+    Nationality: "",
+    CitizenID: "",
+    Email: "",
+    MobilePhone: "",
+    InsuranceCompany: "",
+  },
+];
+const changeStaus = (StatusSave) => {
+  if (StatusSave) {
+    const elements = document
+      .getElementById("TableInsuranceAgent")
+      .getElementsByClassName("tdcell_status");
+
+    for (let element of elements) {
+      element.innerHTML = "Completed";
+
+      element.style.color = "rgb(244 241 241)";
+      element.style.textShadow = "1px 1px 2px #514b4c";
+      element.style.backgroundColor = "#1ac939";
+    }
+  } else if (!StatusSave) {
+    const elements = document
+      .getElementById("TableInsuranceAgent")
+      .getElementsByClassName("tdcell_status");
+
+    for (let element of elements) {
+      element.innerHTML = "Error";
+
+      element.style.color = "rgb(244 241 241)";
+      element.style.textShadow = "1px 1px 2px #514b4c";
+      element.style.backgroundColor = "red";
+    }
+  }
+};
+
+const localStorageRemove = (key) => {
+  if (localStorage.getItem(key) !== null) {
+    localStorage.removeItem(key);
+  }
+};
+
+const isLocalStorageItemValid = (key) => {
+  try {
+    const value = localStorage.getItem(key);
+    if (value === null || value === undefined) {
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("Error checking localStorage:", error);
+    return false;
+  }
+};
+function KeysNameMatchColumnsObj(obj1, obj2) {
+
+  //   console.log("check :",obj1_sort ,obj2_sort );
+  var obj1_sort_upper = ConvertWordsUppercase(obj1);
+  var obj2_sort_upper = ConvertWordsUppercase(obj2);
+  var obj1_sort_upper_Spaces = ReplaceSpacesWords(obj1_sort_upper);
+  var obj2_sort_upper_Spaces = ReplaceSpacesWords(obj2_sort_upper);
+ 
+
+  const obj1_sort = Object.keys(obj1_sort_upper_Spaces).sort();
+  const obj2_sort = Object.keys(obj2_sort_upper_Spaces).sort();
+
+  console.log("obj2_sort_upper_Spaces", obj1_sort);
+  console.log("obj1_sort_upper_Spaces", obj2_sort);
+  // for (let A = 0; A < Object.keys(obj1_sort).length; A++) {
+  //   if (obj1_sort[A] != obj2_sort[A]) {
+  //     console.log(
+  //       "Format Col Error :: ",
+  //       obj1_sort[A] + " != " + obj2_sort[A]
+  //     );
+  //     return false;
+  //   }
+  // }
+
+  return true;
+}
+
+function ConvertWordsUppercase(obj) {
+  var result = {};
+  Object.keys(obj).forEach(function (key) {
+    result[key] =
+      typeof obj[key] === "string" ? obj[key].toUpperCase() : obj[key];
+  });
+  return result;
+}
+
+function ReplaceSpacesWords(array) {
+  var result = {};
+  Object.keys(array).forEach(function (key) {
+    result[key] =
+      typeof array[key] === "string"
+        ? array[key].replace(/ /g, "")
+        : array[key];
+  });
+  return result;
+}
+
+function findObjectByKey(key, value) {
+  return data.find(function (obj) {
+    return obj[key] === value;
+  });
+}
+
+const getObjectLength = (ObjectValue) => {
+  objectLength = Object.keys(ObjectValue).length;
+  return objectLength;
+};
+
+const clearTable = () => {
+  document.querySelectorAll(".thCell").forEach((el) => el.remove());
+  document.querySelectorAll(".tdcell").forEach((el) => el.remove());
+  document.querySelectorAll(".tdcell_status").forEach((el) => el.remove());
+};
+
+function clearEntireTable() {
+  var table = document.getElementById("TableInsuranceAgent");
+  var theadRow = table
+    .getElementsByTagName("thead")[0]
+    .getElementsByTagName("tr")[0];
+  if (theadRow) {
+    var theadCells = theadRow.getElementsByTagName("th");
+    for (var i = 0; i < theadCells.length; i++) {
+      theadCells[i].textContent = "";
+    }
+
+    var tbodyRows = table
+      .getElementsByTagName("tbody")[0]
+      .getElementsByTagName("tr");
+    for (var i = 0; i < tbodyRows.length; i++) {
+      var tbodyCells = tbodyRows[i].getElementsByTagName("td");
+      for (var j = 0; j < tbodyCells.length; j++) {
+        tbodyCells[j].textContent = "";
+      }
+    }
+  }
+}
+
+function isDuplicateAndNull(jsonArrayList, columnlength) {
+  const seen = new Set();
+
+  for (var i = 0; i < jsonArrayList.length; i++) {
+    // console.log(jsonArrayList[i][key]);
+
+    for (var key in jsonArrayList[i]) {
+      //   if (key.toUpperCase().replace(/ /g, "") == "CITIZENID") {
+      //     console.log(key, jsonArrayList[i][key]);
+      //     if (seen.has(jsonArrayList[i][key])) {
+      //       return true;
+      //     }
+      //     seen.add(jsonArrayList[i][key]);
+      //   }
+      //   if (key.toUpperCase().replace(/ /g, "") == "Nationlity") {
+      //     if (
+      //       jsonArrayList[i][key] === null ||
+      //       jsonArrayList[i][key] === undefined ||
+      //       jsonArrayList[i][key] === ""
+      //     ) {
+      //       console.log("null", jsonArrayList[i][key]);
+      //       jsonArrayList[i][key] = 0;
+      //     }
+      //   }
+    }
+
+    // ยังไม่รู้วิธีเเก้ Format CITIZENID  เเละ ข้อมูลผิดถ้ามีค่าว่างห
+
+    // console.log(Object.keys(jsonArrayList[i]).length + "!=" + columnlength);
+    // if (Object.keys(jsonArrayList[i]).length != columnlength) {
+    //   return true;
+    // }
+  }
+  return false;
+}
+
+function AddColumnsToTable(listExcelinput) {
+  // clearEntireTable();
+
+  const button = document.getElementById("inputExcelinsuran");
+
+  if (getObjectLength(listExcelinput[0]) != getObjectLength(dataColumns[0])) {
+    console.log(
+      getObjectLength(listExcelinput[0]) +
+        " != " +
+        getObjectLength(dataColumns[0])
+    );
+    console.log(listExcelinput);
+
+    clearTable();
+    document.getElementById("displayshowText").style.display = "block";
+    document.getElementById("TextshowError").innerText =
+      "The uploaded data has abnormal row values.";
+    button.disabled = true;
+    button.style.backgroundColor = "#9c9c9c";
+    return false;
+  } else {
+    clearTable();
+    if (KeysNameMatchColumnsObj(listExcelinput[0], dataColumns[0])) {
+      document.getElementById("displayshowText").style.display = "none";
+      var tableHeader = document.querySelector("#TableInsuranceAgent thead tr");
+
+      dataColumns[0].Status = "Status";
+      for (var keyColumns in dataColumns[0]) {
+        //  console.log('key: ', keyColumns)
+        if (dataColumns[0].hasOwnProperty(keyColumns)) {
+          var th = document.createElement("th");
+          th.innerHTML = keyColumns;
+          th.className = "thCell";
+          tableHeader.appendChild(th);
+        }
+      }
+      //  console.log("dataColumns[0]",dataColumns[0]);
+      const numberOfProperties = Object.keys(dataColumns[0]).length;
+      AddRowsToTable(listExcelinput, numberOfProperties);
+      return true;
+    } else {
+      clearTable();
+      document.getElementById("displayshowText").style.display = "block";
+      document.getElementById("TextshowError").innerText =
+        "The uploaded data has abnormal column values.";
+      button.disabled = true;
+      button.style.backgroundColor = "#9c9c9c";
+      return false;
+    }
+  }
+}
+
+function AddRowsToTable(listExcelinput, columnlength) {
+  // clearEntireTable();
+  const button = document.getElementById("inputExcelinsuran");
+  var tableBody = document.getElementById("TableBodyInsuranceAgent");
+
+  let newKeyName = "Status";
+  let newValue = "pending";
+
+  for (var i = 0; i < listExcelinput.length; i++) {
+    for (var key in listExcelinput[i]) {
+      if (listExcelinput[i].hasOwnProperty(key)) {
+        listExcelinput[i][newKeyName] = newValue;
+      }
+    }
+  }
+
+  if (isDuplicateAndNull(listExcelinput, columnlength)) {
+    clearTable();
+    clearEntireTable();
+    document.getElementById("displayshowText").style.display = "block";
+    document.getElementById("TextshowError").innerText =
+      "Data in Excel has duplicate data or blank data in rows.";
+    localStorageRemove("tableInsuranceAgentExcel");
+
+    button.disabled = true;
+    button.style.backgroundColor = "#9c9c9c";
+    return false;
+  }
+
+  //   console.log("listExcelinput : ", listExcelinput);
+
+  for (var i = 0; i < listExcelinput.length; i++) {
+    var row = document.createElement("tr");
+
+    for (var key in listExcelinput[i]) {
+      if (listExcelinput[i].hasOwnProperty(key)) {
+        var cell = document.createElement("td");
+        cell.innerHTML = listExcelinput[i][key];
+
+        if (key == newKeyName) {
+          cell.className = "tdcell_status";
+          cell.style.color = "rgb(244 241 241)";
+          cell.style.textShadow = "1px 1px 2px #514b4c";
+          cell.style.backgroundColor = "cornflowerblue";
+        } else {
+          cell.className = "tdcell";
+        }
+        row.appendChild(cell);
+        // console.log(listExcelinput[i][key]);
+      }
+    }
+    button.disabled = false;
+    button.style.backgroundColor = "#296192";
+
+    tableBody.appendChild(row);
+  }
+}
+
+var ExcelToJSON = function () {
+  this.parseExcel = function (file) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      var data = e.target.result;
+      var workbook = XLSX.read(data, {
+        type: "binary",
+      });
+
+      workbook.SheetNames.forEach(function (sheetName) {
+        const XL_row_object = XLSX.utils.sheet_to_row_object_array(
+          workbook.Sheets[sheetName],
+          {
+            range: XLSX.utils.decode_range(workbook.Sheets[sheetName]["!ref"]),
+            blankrows: false,
+            ignoreDropdowns: false,
+          }
+        );
+
+        var json_object = JSON.stringify(XL_row_object);
+        productList = JSON.parse(json_object);
+
+        const renamedObj = RenameObj(productList);
+        const objDataExcel = loopAddKeyObj(renamedObj);
+
+        objDataExcel.forEach((item, index) => {
+          delete item["insurance_company"];
+          delete item["mobile_phone"];
+          delete item["citizen_id"];
+        });
+
+        console.log("data :", objDataExcel);
+        // console.log("CitizenID :", productList[0]["CitizenID"]);
+        // console.log("firstname :", productList[4]["firstname"]);
+        // console.log("lastname :", productList[5]["lastname"]);
+
+        if (
+          objDataExcel[0]["CitizenID"] != undefined 
+          // objDataExcel[4]["firstname"] != undefined &&
+          // objDataExcel[5]["lastname"] != undefined
+        ) {
+          if (AddColumnsToTable(objDataExcel)) {
+            localStorage.setItem(
+              "tableInsuranceAgentExcel",
+              JSON.stringify(objDataExcel)
+            );
+          } else {
+            localStorageRemove("tableInsuranceAgentExcel");
+          }
+        } else {
+          console.error("Error");
+        }
+      });
+    };
+    reader.onerror = function (ex) {
+      console.log(ex);
+    };
+    reader.readAsBinaryString(file);
+  };
+};
+
+function handleFileSelect(evt) {
+  var files = evt.target.files;
+  var xl2json = new ExcelToJSON();
+  var files = evt.target.files;
+  console.log("files: ", files);
+  xl2json.parseExcel(files[0]);
+}
+
+function handleFileSelectDrop(FileDrop) {
+  var xl2json = new ExcelToJSON();
+  var files = FileDrop;
+  console.log("files drop: ", files);
+  xl2json.parseExcel(files[0]);
+}
+
+function removeItemByValue(array, value) {
+  return array.filter((item) => item !== value);
+}
+
+function RenameObj(obj) {
+  const renamedObj = obj.map((item) => ({
+    ...item,
+    InsuranceCompany: item["insurance_company"],
+    Mobilephone: item["mobile_phone"],
+    CitizenID: item["citizen_id"],
+  }));
+  return renamedObj;
+}
+
+// function loopAddKeyObj(renamedObj) {
+//   const objDataExcel = [];
+//   for (let a = 0; a < renamedObj.length; a++) {
+//     const obj = {};
+//     for (const key of Object.keys(dataColumns)) {
+//       if (Object.keys(renamedObj[a]).includes(key)) {
+//         // console.log("dataColumns[key]",dataColumnsFix[key]);
+//         if (renamedObj[a][key] !== dataColumns[key]) {
+//           obj[key] = dataColumns[key];
+//         }
+//       }
+//     }
+//     const objTemp = Object.assign({}, renamedObj[a], obj);
+//     objDataExcel.push(objTemp);
+//   }
+
+//   return objDataExcel;
+// }
+function loopAddKeyObj(renamedObj) {
+  const objDataExcel = [];
+  console.log("renamedObj",renamedObj);
+
+    const ColumnsFix = {
+      Title: "",
+      Firstname: "",
+      Lastname: "",
+      Nationality: "",
+      CitizenID: "",
+      Email: "",
+      MobilePhone: "",
+      InsuranceCompany: "",
+  };
+  
+  for (let a = 0; a < renamedObj.length; a++) {
+    const obj = {};
+    for (const key of Object.keys(ColumnsFix)) {
+        if (!Object.keys(renamedObj[a]).includes(key)) {
+            if (renamedObj[a][key] !== ColumnsFix[key]) {
+                obj[key] = ColumnsFix[key];
+            }
+        }
+    }
+    const objTemp = Object.assign({}, renamedObj[a], obj);
+    objDataExcel.push(objTemp);
+}
+
+  return objDataExcel;
+}
+// drop
+
+// import Excel ----------------------------------------------------------------------------------------------
+
+</script>
+</html>

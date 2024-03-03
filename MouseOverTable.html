@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="/Font/SetFontKanis.css">
+
+    <link rel="shortcut icon" href="#">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+ /* td:hover::before { 
+    background-color: rgba(170, 255, 255, 0.37);
+    content: '';  
+    height: 100%;
+    left: -5000px;
+    position: absolute;  
+    top: 0;
+    width: 10000px;   
+    z-index: -2;        
+}
+
+
+td:hover::after { 
+    background-color: rgba(170, 255, 255, 0.336);
+    content: '';  
+    height: 10000px;    
+    left: 0;
+    position: absolute;  
+    top: -5000px;
+    width: 100%;
+    z-index: -1;        
+}
+
+table {
+
+    
+
+  overflow: hidden;
+  display:inline-block;
+}
+
+td, th {
+    border: 1px solid #999;
+    padding: 10px;
+    position: relative;
+}
+
+th {
+  background-color:#fff;
+}
+
+table{border-collapse:collapse}
+th,td{padding:10px}  */
+
+    </style>
+
+
+
+<Style>
+ 
+ tr{
+    position: relative;
+    width: auto;
+ }
+
+.SetPopupmain{
+width: 100%;
+max-width: 200px;
+height: 60px;
+padding: 10px;
+background-color: rgba(130, 225, 231, 0.418);
+color: white;
+border-radius: 6px;
+position: absolute;
+text-shadow: 1px 1px 2px rgba(132, 140, 148, 0.64);
+top: -60px;
+/* display: none; */
+}
+
+
+ .SetPopupmain::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 40%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #85d9f37c transparent transparent transparent;
+}
+</style>
+</head>
+
+<body>
+
+    
+
+<div class="container" style="margin-top: 50px;">
+
+
+
+<div style="margin-top: 300px;">
+</div>
+
+    <table  border="1">
+        <tr>
+          <th class="xxx">Name <span class="SetPopupmain">1</span></th>
+          <th >Age  
+          
+        </th>
+          <th>Agex
+         
+          </th>
+          <th>Agex</th>
+          <th>Agex</th>
+        </tr>
+        <tr>
+          <td>Aryan</td>
+          <td>26</td>
+          <td>22</td>
+          <td>26</td>
+          <td>22</td>
+        </tr>
+        <tr>
+          <td>Dia</td>
+          <td>22</td>
+          <td>22</td>
+          <td>26</td>
+          <td>22</td>
+        </tr>
+        <tr>
+            <td>Dia</td>
+            <td>22</td>
+            <td>22</td>
+            <td>26</td>
+            <td>22</td>
+          </tr>
+        </table>
+    </div>
+
+    <script>    
+
+    $(document).ready(function () {
+        $(document).on('mouseover', 'td,th', function () {
+            $(this).append("<span>คลิกรายชื่อเพื่อตรวจสอบข้อมูลรับสมัคร</span>");
+            $(this).find('span').removeClass();
+            $(this).find('span').addClass('SetPopupmain');
+            $(".SetPopupmain").css("display", "block");
+           
+        });
+        $(document).on('mouseout', 'th,td', function () {
+            $(".SetPopupmain").css("display", "none");
+            $(this).find('span').remove();
+         });   
+         
+        
+    });
+
+
+
+    </script>
+
+
+</body>
+
+</html>

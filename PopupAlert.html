@@ -1,0 +1,175 @@
+
+    <style>
+
+        /*POPUP*/
+        .mySlides {
+            display: none;
+            
+        }
+
+   
+        .numbertext {
+            color: #ffffff;
+            font-size: 30px;
+            padding: 8px 12px;
+            right: 15px;
+            text-shadow: 1px 1px 2px rgba(25, 136, 247, 0.8);
+            position: absolute; 
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .activePopup,
+        .dot:hover {
+            background-color: #717171;
+        }
+
+        .fade_ {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+
+        @media only screen and (max-width: 300px) {
+
+            .prev,
+            .next,
+            .text {
+                font-size: 11px
+            }
+        }
+
+
+     
+        .BlackguardPopup {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 80px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        .Box_Popup {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 5px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width:550px;
+            border-radius: 10px;
+            text-align: -webkit-center;
+            position: relative;
+        }
+
+        .Img_Popup {
+            width: 100%;
+             max-width:550px;
+            
+             height: auto; 
+            border-radius: 10px;
+
+        }
+
+        .Text_Popup {
+            margin: 0px !important;
+            padding: 0px !important;
+        }
+        
+    </style>
+
+
+    <div id="IDBlackguardPopup" class="BlackguardPopup">
+        <div class="Box_Popup ">
+            <div class="mySlides fade_">
+                <div class="numbertext">1 / 2</div>
+                <img class="Img_Popup" src="https://cc.cnu.ac.th/WebMode/News/UploadFileLogin/Report_2.jpg"
+                    style="width:100% ">
+               
+            </div>
+            <div class="mySlides fade_">
+                <div class="numbertext">2 / 2</div>
+                <img class="Img_Popup" src="https://cc.cnu.ac.th/WebMode/News/UploadFileLogin/Report.jpg">
+                
+            </div>
+            <br>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+            <br>
+            <p onclick="ClosepopUp()" class="mt-3 Text_Popup" style="font-size: 20px; color: #00070e; text-shadow: 1px 1px 2px rgba(185, 185, 185, 0.8);">
+                เข้าสู่หน้าเว็บไซต์</p>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("IDBlackguardPopup");
+        modal.style.display = "block";
+        function ClosepopUp() {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == IDBlackguardPopup) {
+                modal.style.display = "none";
+            }
+        }
+        let slideIndex = 1;
+     
+        function currentSlide(n) {
+                showSlides(slideIndex = n);
+                }
+                
+        showSlides(slideIndex);
+        let imgcount = 0;
+        setInterval(() => {
+            if (imgcount >= 2) {
+                imgcount = 0;
+            }
+            imgcount++   
+            showSlides(slideIndex = imgcount);
+            console.log(imgcount);
+        }, 2000);
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" activePopup", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " activePopup";
+        }
+    </script>

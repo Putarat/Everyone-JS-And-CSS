@@ -1,0 +1,277 @@
+<style>
+    .FlexCNU {
+        display: flex;
+        gap: 10px;
+    }
+
+    .FlexCNU>div {
+        background-color: #f1f1f1;
+        display: 0 0 100%;
+        scroll-snap-align: start;
+    }
+
+    .boxCourseCnu {
+        position: relative;
+    }
+
+
+    .boxCourseCnu img {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .imgCourseOverlap img {
+        max-width: 400px;
+        width: 100%;
+    }
+
+
+    .imgCourseOverlap {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        width: 0;
+        transition: .3s ease;
+    }
+
+    .boxCourseCnu:hover .imgCourseOverlap {
+        width: 100%;
+    }
+
+
+    .imgShowScroll {
+        display: none;
+    }
+
+    .containerCNU {
+        width: 100%;
+        max-width: 1800px;
+        margin: 0 auto;
+    }
+
+
+    .FlexCNU::-webkit-scrollbar {
+
+        height: 5px;
+    }
+
+    .FlexCNU::-webkit-scrollbar-thumb {
+        background: #42c8ff;
+    }
+
+    .FlexCNU::-webkit-scrollbar-track {
+        background: unset;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .FlexCNU {
+            display: flex;
+            overflow-x: scroll;
+            width: 100%;
+            scroll-snap-align: x mandatory;
+            scroll-padding: 24px;
+            gap: 2px;
+        }
+
+        .boxCourseCnu img {
+            width: 320px;
+        }
+    }
+</style>
+
+
+<div style="margin: 50px auto;">
+    <div id="textContent" class="ControllSpacText LineText reveal fade-bottom">
+        <h1 class="TextColorCnu" id="linkSlide-group">คณะที่เปิดสอน</h1>
+        <p>ให้ความรู้ ความชำนาญ เเละทักษะเเก่ผู้ศึกษา</p>
+    </div>
+    <div class="containerCNU">
+        <!-- <div class="FlexCNU">
+
+            <a href="https://cnu.ac.th/Course/Nurse.html">
+                <div class="boxCourseCnu">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/nursing_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/nursing_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+			    <a href="https://cnu.ac.th/Course/AssistantNurse.html">
+                <div class="boxCourseCnu">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/NursingAssistant_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/NursingAssistant_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+			
+            <a href="https://cnu.ac.th/Course/BachelorOfPublicHealth.html">
+                <div class="boxCourseCnu">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/Satha_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/Satha_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+	
+          
+			      <a href="https://cnu.ac.th/Course/BachelorOfScience.html">
+                <div class="boxCourseCnu">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/Occupational health_3x4_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/Occupational health_3x4_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+			
+			       <a href="https://cnu.ac.th/Course/TraditionalMedicine.html">
+                <div class="boxCourseCnu">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/ThaiTraditionalMedicine 3x4_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/ThaiTraditionalMedicine 3x4_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+			
+        </div>
+		 -->
+
+        <div class="FlexCNU">
+
+
+            <a href="https://cnu.ac.th/Course/politicalscience.html">
+                <div class="boxCourseCnu CourseCountCNU">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/PoliticalScience_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/PoliticalScience_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+            <a href="https://cnu.ac.th/Course/jurisprudence.html">
+                <div class="boxCourseCnu CourseCountCNU">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/NITI3x4_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/NITI3x4_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+
+
+            <a href="https://cnu.ac.th/Course/AdministrationAccount.html">
+                <div class="boxCourseCnu CourseCountCNU">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/Account3x4_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/Account3x4_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+            <a href="https://cnu.ac.th/Course/Administration.html">
+                <div class="boxCourseCnu CourseCountCNU">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/Handling_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/Handling_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://cnu.ac.th/Course/AdministrationCom.html">
+                <div class="boxCourseCnu CourseCountCNU" id="acti">
+                    <img class="" src="https://cnu.ac.th/BodyMain/CourseCnu/img/Com_3x4_1.jpg" alt="">
+                    <div class="imgCourseOverlap">
+                        <img src="https://cnu.ac.th/BodyMain/CourseCnu/img/Com_3x4_2.png" alt="">
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<style>
+    .CourseCountCNU {
+
+        transition: 0.1s;
+    }
+
+    .activeCourseCnu,
+    .btn:hover {
+        border: 5px rgb(231, 19, 19) solid;
+    }
+</style>
+
+
+<button onclick="currentSlide_LEFT('Reverse_')"> ซ้าย </button>
+<button onclick="currentSlide('GoAhead_')"> ขวา </button>
+
+<!-- <a onclick="currentSlide('GoAhead_')" href="#activeCourseCnuxxx"> ขวา </a> -->
+
+
+<script>
+    var slideIndex = 1;
+    function currentSlide(VlaueJS) {
+        slideIndex++;
+        if (VlaueJS == "GoAhead_") {
+            if (slideIndex > 5) {
+                slideIndex = 1;
+            }
+            showSlides(slideIndex);
+        }
+
+        document.getElementById('FlexCNU').scrollBy({
+            left: 150,
+            behavior: 'smooth'
+        });
+
+
+    }
+
+
+
+
+
+    function currentSlide_LEFT(VlaueJS) {
+        slideIndex--;
+
+        if (VlaueJS == "Reverse_") {
+            if (slideIndex <= 0) {
+                slideIndex = 5;
+            }
+            showSlides(slideIndex);
+        }
+
+    }
+
+
+
+    function ONchangeID() {
+        document.getElementById("demo").innerHTML = element.id;
+    }
+
+
+    function showSlides(ValueSet) {
+        var number = ValueSet;
+        let CourseCountDIV = document.getElementsByClassName("CourseCountCNU");
+
+        console.log("จำนวน" + CourseCountDIV);
+        console.log("_" + number);
+
+        for (let i = 0; i < CourseCountDIV.length; i++) {
+
+            CourseCountDIV[i].className = CourseCountDIV[i].className.replace(" activeCourseCnu", "");
+        }
+        CourseCountDIV[number - 1].className += " activeCourseCnu";
+
+
+
+
+
+
+
+
+    }
+</script>

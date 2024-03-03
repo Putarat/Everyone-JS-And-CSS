@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body id="bodyJS">
+    <style>
+      #TestID,
+      .TestClass {
+        display: none;
+      }
+    </style>
+
+    <!-- <p class="xxx">asdasdsadsadas</p> -->
+
+    <div style="margin: 0 auto; width: 1000px">
+      <h1 style="font-size: 100px" id="TestID">TestIDJS</h1>
+
+      <h1 style="font-size: 100px" class="TestClass">TestClassJS</h1>
+    </div>
+
+    <script>
+        //#region 
+      document.getElementById("bodyJS").onload = function () {
+        //id
+        if (fnOnGetElementAndCheckNullJS("TestID", "id")[0] == true) {
+          fnOnGetElementAndCheckNullJS("TestID", "id")[2].style.display =
+            "block";
+        } else {
+          console.log(fnOnGetElementAndCheckNullJS("TestID", "id")[1]);
+        }
+        //Class
+        if (fnOnGetElementAndCheckNullJS("TestClass", "class")[0] == true) {
+          fnOnGetElementAndCheckNullJS(
+            "TestClass",
+            "class"
+          )[2][0].style.display = "block";
+        } else {
+          console.log(fnOnGetElementAndCheckNullJS("TestClass", "class")[1]);
+        }
+
+        console.log(
+          "ทดสอบ class ::" + fnOnGetElementAndCheckNullJS("TestClass", "class")
+        );
+        console.log(
+          "ทดสอบ id ::" + fnOnGetElementAndCheckNullJS("TestID", "id")
+        );
+        //ทดสอบ
+        console.log(
+          "ทดสอบ ไม่มีค่า ::" + fnOnGetElementAndCheckNullJS("xxx", "")
+        );
+      };
+
+      function fnOnGetElementAndCheckNullJS(valueName, valueType) {
+        
+        //Array return
+        // Array ตัวที่ 0 = true คือ มีค่า  /  false คือไม่มีค่า
+        // Array ตัวที่ 1 = สถานะ เเจ้งเตือน
+        // Array ตัวที่ 2 = return Element / 000 คือ Erorr
+        if (
+          valueName != null ||
+          (valueName != "" && valueType != null) ||
+          valueType != ""
+        ) {
+          if (valueType == "id") {
+            if (document.getElementById(valueName) != null) {
+              return [
+                true,
+                "มีการเรียกใช้ " + valueType + " ชื่อ" + valueName,
+                document.getElementById(valueName),
+              ];
+            } else {
+              delete document.getElementById(valueName);
+              return [
+                false,
+                "ไม่เจอ " +
+                  valueType +
+                  " ที่ต้องการชื่อที่เรียก :: " +
+                  valueName,
+                000,
+              ];
+            }
+          } else if (valueType == "class") {
+            if (document.getElementsByClassName(valueName).length) {
+              return [
+                true,
+                "มีการเรียกใช้ " + valueType + " ชื่อ" + valueName,
+                document.getElementsByClassName(valueName),
+              ];
+            } else {
+              delete document.getElementsByClassName(valueName);
+              return [
+                false,
+                "ไม่เจอ " +
+                  valueType +
+                  " ที่ต้องการชื่อที่เรียก :: " +
+                  valueName,
+                000,
+              ];
+            }
+          } else {
+            delete document.getElementsByClassName(valueName);
+            return [
+              false,
+              " ไม่เจอข้อมูล :: " +
+                valueType +
+                " ชื่อ :: " +
+                valueName +
+                " อาจเกิดจากการส่งตัวเเปลผิด",
+              000,
+            ];
+          }
+        } else {
+          console.log(
+            "fnOnGetElementAndCheckNullJS ผิดปกติ  ชื่อ ::" +
+              valueName +
+              "ประเภท ::" +
+              valueType
+          );
+        }
+      }
+      //#endregion
+    </script>
+  </body>
+</html>
